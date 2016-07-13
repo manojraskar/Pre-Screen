@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import com.restful.contactlist.exception.DataNotFoundException;
 import com.restful.contactlist.model.Contact;
 import com.restful.contactlist.service.ContactService;
 
@@ -35,7 +36,12 @@ public class ContactResource {
 	@GET
 	@Path("/{contactName}")
 	public Contact getContact(@PathParam("contactName") String contactName){
-		return contactService.getContact(contactName);
+		//return contactService.getContact(contactName);
+		Contact retrieveContact = contactService.getContact(contactName);
+		if(retrieveContact == null){
+			throw new DataNotFoundException("Contact "+contactName+" not found");
+		}
+		return retrieveContact;
 	}
 	
 	@POST

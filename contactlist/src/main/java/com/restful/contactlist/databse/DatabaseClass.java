@@ -13,8 +13,4 @@ public class DatabaseClass {
 		return contacts;
 	}
 
-	public static void setContacts(Map<String, Contact> contacts) {
-		DatabaseClass.contacts = contacts;
-	}
-
 }
